@@ -24,35 +24,37 @@
 import { mapState } from 'vuex'
 
 export default {
-    props: {
-        categoryFilter: {
-            type: String
-        }
-    },
-    computed: {
-        ...mapState({
-            posts: state => state.post.list
-        }),
-        filteredPosts() {
-            return typeof(categoryFilter) === 'undefined' ? this.posts : this.posts.filter(value => {
-                value.categories.name === this.categoryFilter
-            })
-        }
-    },
-    mounted() {
-        console.log('index.vue.post=', this.posts)
-    },
-    methods: {
-        onPostClick(post) {
-            console.log('onPostClick post=', post)
-            this.$router.push({
-                name: 'post-id',
-                params: {
-                    id: post.id
-                }
-            })
-        }
+  props: {
+    categoryFilter: {
+      type: String
     }
+  },
+  computed: {
+    ...mapState({
+      posts: state => state.post.list
+    }),
+    filteredPosts() {
+      return typeof(this.categoryFilter) === 'undefined' ? this.posts : this.posts.filter(post => {
+        /** @type {any[]} */
+        let categories = post.categories
+        return categories.findIndex(category => category.name.endsWith(this.categoryFilter)) !== -1
+      })
+    }
+  },
+  mounted() {
+    console.log('index.vue.post=', this.posts)
+  },
+  methods: {
+    onPostClick(post) {
+      console.log('onPostClick post=', post)
+      this.$router.push({
+        name: 'post-id',
+        params: {
+          id: post.id
+        }
+      })
+    }
+  }
 }
 </script>
 

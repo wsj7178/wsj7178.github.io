@@ -1,5 +1,5 @@
 <template>
-  <PostList :categoryFilter="this.$route.params.id"/>
+  <PostList :categoryFilter="this.$route.params.category"/>
 </template>
 
 <script>
