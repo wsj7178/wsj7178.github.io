@@ -2,7 +2,7 @@
   "name": "githubblog",
   "version": "1.0.0",
   "description": "Nuxt.js project",
-  "author": "maru",
+  "author": "maru <wsj7178@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "nuxt",
