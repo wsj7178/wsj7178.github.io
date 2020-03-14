@@ -1,5 +1,6 @@
 import Github from 'github-api'
 import axios from 'axios'
+import Log from '../scripts/Log'
 
 export const state = () => ({
   list: [],
@@ -12,11 +13,11 @@ export const getters = {
 
 export const mutations = {
   setList(state, list) {
-    console.log('setList list=', list)
+    Log.log('setList list=', list)
     state.list = list
   },
   setCategories(state, categories) {
-    console.log('setCategories categories=', categories)
+    Log.log('setCategories categories=', categories)
     state.categories = categories
   }
 }
@@ -36,7 +37,7 @@ export const actions = {
       promises.push(new Promise((resolve, reject) => {
         issueManager.listIssues(null, (error, result, request) => {
           if (error) reject(error)
-          console.log('initPost listIssues result=', result)
+          Log.log('initPost listIssues result=', result)
           result.forEach(issue => {
             let post = {
               id: issue.number,
@@ -47,7 +48,7 @@ export const actions = {
               content: issue.body,
               categories: getCategories(issue.labels)
             }
-            console.log(issue.title, 'initPost listIssues labels=', issue.labels)
+            Log.log(issue.title, 'initPost listIssues labels=', issue.labels)
             list.push(post)
           })
           context.commit('setList', list)
@@ -57,7 +58,7 @@ export const actions = {
       promises.push(new Promise((resolve, reject) => {
         issueManager.listLabels(null, (error, result, request) => {
           if (error) reject(error)
-          console.log('initPost listLabels result=', result)
+          Log.log('initPost listLabels result=', result)
           context.commit('setCategories', result.filter(value => value.name.startsWith('categories:')))
           resolve()
         })

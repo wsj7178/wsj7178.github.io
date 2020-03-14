@@ -59,6 +59,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import Log from '../scripts/Log'
+
 export default {
   beforeCreate() {
     this.$store.dispatch('post/initPost')
@@ -84,14 +86,14 @@ export default {
   methods: {
     getCategoryName(name) {
       let result = /categories:(.+)/.exec(name)
-      console.log('regex result=', result)
+      Log.log('regex result=', result)
       return result && result[1]
     },
     /**
      * @param {String} category
      */
     onClickCategory(category) {
-      this.$router.push(`/category/${category}`)
+      this.$router.push(`/category?id=${category}`)
     }
   }
 }

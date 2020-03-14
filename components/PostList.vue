@@ -22,6 +22,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import Log from '../scripts/Log'
 
 export default {
   props: {
@@ -42,17 +43,12 @@ export default {
     }
   },
   mounted() {
-    console.log('index.vue.post=', this.posts)
+    Log.log('index.vue.post=', this.posts)
   },
   methods: {
     onPostClick(post) {
-      console.log('onPostClick post=', post)
-      this.$router.push({
-        name: 'post-id',
-        params: {
-          id: post.id
-        }
-      })
+      Log.log('onPostClick post=', post)
+      this.$router.push(`/post?id=${post.id}`)
     }
   }
 }

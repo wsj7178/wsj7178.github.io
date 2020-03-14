@@ -27,7 +27,6 @@ module.exports = {
     "keyword-spacing": 0,
     "no-unused-vars": 1,
     "no-multiple-empty-lines": 0,
-    "no-console": "off",
 
     "vue/html-indent": ["error", 2]
   }
